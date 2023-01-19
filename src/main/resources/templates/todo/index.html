@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Todolist</title>
+  <style>
+    .red{
+      color: red;
+    }
+    .invalid{
+      border:2px solid red;
+    }
+  </style>
+</head>
+<body>
+  <h2>登録</h2>
+  <form th:action="@{/create}" th:object="${todoList}" method="post">
+    <label>コンテンツ</label>
+    <input type="text" th:field="*{content}" th:errorclass="invalid"><br>
+    <div class="red" th:errors="*{content}"></div>
+    <label>達成</label>
+    <input type="checkbox" th:field="*{todo}"  th:errorclass="invalid"><br>
+    <div class="red" th:errors="*{todo}"></div>
+    <button>送信</button>
+  </form>
+
+  <h2>一覧</h2>
+  <table>
+    <thead>
+      <tr>
+        <td>ID</td>
+        <td>コンテンツ</td>
+        <td>達成</td>
+      </tr>
+    </thead>
+    <tr th:each="todoList : ${people}">
+      <td>[[${todoList.id}]]</td>
+      <td>[[${todoList.content}]]</td>
+      <td>[[${todoList.todo}]]</td>
+      <td><a th:href="@{/edit/{id}(id=${todoList.id})}">編集</a></td>
+      <td><a th:href="@{/delete/{id}(id=${todoList.id})}">削除</a></td>
+    </tr>
+  </table>
+</body>
+</html>
