@@ -20,6 +20,7 @@ public class TodoList {
     @GeneratedValue
     private Long id;
 
+    
     @NotBlank
     @Size(max = 120)
     private String content;
